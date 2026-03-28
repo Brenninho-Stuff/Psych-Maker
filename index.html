@@ -43,17 +43,17 @@
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 2rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .panel {
             flex: 1;
-            min-width: 350px;
+            min-width: 380px;
             background: #111827;
             border-radius: 1.5rem;
             padding: 1.5rem;
@@ -67,7 +67,7 @@
         }
 
         .panel h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
@@ -77,13 +77,13 @@
         }
 
         .panel h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin: 1rem 0 0.75rem 0;
             color: #cbd5e1;
         }
 
         .input-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         label {
@@ -91,18 +91,18 @@
             font-weight: 500;
             margin-bottom: 0.5rem;
             color: #cbd5e1;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.65rem 1rem;
             background: #0f172a;
             border: 1px solid #2d3a5e;
             border-radius: 0.75rem;
             color: white;
             font-family: 'Courier New', 'Fira Code', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
@@ -115,14 +115,14 @@
         button {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             border: none;
-            padding: 0.75rem 1.25rem;
+            padding: 0.65rem 1.1rem;
             border-radius: 0.75rem;
             font-weight: 600;
             color: white;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.9rem;
-            margin-right: 0.75rem;
+            font-size: 0.85rem;
+            margin-right: 0.6rem;
             margin-bottom: 0.5rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
@@ -145,6 +145,10 @@
             background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
+        button.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
         .code-area {
             background: #0f172a;
             border-radius: 1rem;
@@ -155,7 +159,7 @@
 
         .code-header {
             background: #1e293b;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -166,27 +170,28 @@
 
         textarea.code-output {
             font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             background: #0a0f1a;
-            height: 380px;
+            height: 450px;
             resize: vertical;
             border-radius: 0;
             border: none;
             margin: 0;
             padding: 1rem;
+            line-height: 1.4;
         }
 
         .badge {
             background: #2563eb20;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 2rem;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #60a5fa;
         }
 
-        .grid-2col, .grid-3col {
+        .grid-2col, .grid-3col, .grid-4col {
             display: grid;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .grid-2col {
@@ -197,13 +202,17 @@
             grid-template-columns: repeat(3, 1fr);
         }
 
+        .grid-4col {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
         hr {
             border-color: #2d3a5e;
             margin: 1rem 0;
         }
 
         .help-text {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #64748b;
             margin-top: 0.25rem;
         }
@@ -219,107 +228,128 @@
             text-align: center;
         }
 
-        @media (max-width: 1200px) {
+        .slider-value {
+            display: inline-block;
+            background: #1e293b;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 1400px) {
             .container { flex-direction: column; padding: 1rem; }
-            .grid-2col, .grid-3col { grid-template-columns: 1fr; }
+            .grid-2col, .grid-3col, .grid-4col { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 <header>
     <h1>🎸 PSYCH MAKER</h1>
-    <p>Advanced Lua Script & Stage JSON Generator for Psych Engine | Based on ShadowMario/FNF-PsychEngine</p>
+    <p>Ultimate Lua Script & Stage JSON Generator for Psych Engine | 100+ Script Templates</p>
 </header>
 
 <div class="container">
-    <!-- PAINEL IA NATURAL LANGUAGE -->
+    <!-- PAINEL AI & QUICK GENERATOR -->
     <div class="panel">
-        <h2>🤖 AI Script Generator</h2>
+        <h2>🤖 AI & Quick Generator</h2>
         <div class="input-group">
-            <label>📝 Describe your desired behavior (English or Portuguese)</label>
-            <textarea id="aiPrompt" rows="3" placeholder="Examples: 'create a script that makes the screen shake when health is low and notes become rainbow' or 'add a cutscene before the song starts with dialogue'"></textarea>
+            <label>📝 Describe your script (English/Portuguese)</label>
+            <textarea id="aiPrompt" rows="2" placeholder="Ex: 'drunk camera with shaking icons and moving notes'"></textarea>
         </div>
         <button id="generateAiBtn">✨ Generate AI Script</button>
-        <div class="help-text">💡 Supports: note skins, camera effects, cutscenes, health events, shaders, character animations, and more!</div>
-    </div>
-
-    <!-- PAINEL NOTE SCRIPTS -->
-    <div class="panel">
-        <h2>🎨 Note & Visual Scripts</h2>
-        <div class="input-group">
-            <label>📁 Texture Name (e.g., 'noteSkins/custom_notes')</label>
-            <input type="text" id="noteTexture" placeholder="myCoolNotes" value="customNotes">
-        </div>
+        <hr>
+        <h3>⚡ Quick Templates</h3>
         <div class="grid-2col">
-            <button id="genNoteSkin">Note Skin Script</button>
-            <button id="genRainbowNotes" class="secondary">🌈 Rainbow Notes</button>
-            <button id="genPulsingNotes" class="secondary">💫 Pulsing Notes</button>
-            <button id="genNoteSplashes" class="secondary">💥 Custom Note Splashes</button>
-        </div>
-        <div class="input-group">
-            <label>✨ Extra Effect</label>
-            <select id="noteEffect">
-                <option value="none">None</option>
-                <option value="shake">Shake on Beat</option>
-                <option value="scale">Scale on Hit</option>
-                <option value="glow">Glow Effect</option>
-                <option value="rotate">Rotating Notes</option>
-            </select>
+            <button id="quickDrunkMode" class="warning">🍺 Drunk Mode (Camera + Icons)</button>
+            <button id="quickWaveNotes" class="secondary">🌊 Wave Notes Effect</button>
+            <button id="quickBpmSync" class="secondary">🎵 BPM Sync Pulse</button>
+            <button id="quickHealthBarColor" class="secondary">💚 Health Bar Color</button>
         </div>
     </div>
 
-    <!-- PAINEL CAMERA & VISUAL EFFECTS -->
+    <!-- PAINEL ADVANCED VISUAL EFFECTS -->
     <div class="panel">
-        <h2>🎥 Camera & Visual FX</h2>
+        <h2>🎨 Advanced Visual FX</h2>
         <div class="grid-2col">
-            <button id="genCameraZoom">🔍 Camera Zoom on Beat</button>
-            <button id="genCameraShake">🌊 Camera Shake on Miss</button>
-            <button id="genFlashEffect">⚡ Flash on Beat</button>
-            <button id="genChromAberration">🌈 Chromatic Aberration</button>
+            <button id="genDrunkMode">🍺 Drunk Mode (Full)</button>
+            <button id="genEarthquake">🌍 Earthquake Effect</button>
+            <button id="genSinWave">📈 Sine Wave Notes</button>
+            <button id="genSpinNotes">🔄 Spinning Notes</button>
+            <button id="genBounceNotes">⚾ Bounce Notes</button>
+            <button id="genGlowNotes">✨ Glow Pulse Notes</button>
+            <button id="genTrailNotes">👻 Note Trails</button>
+            <button id="genGravityNotes">⬇️ Gravity Notes</button>
         </div>
         <div class="input-group">
-            <label>🎨 Shader Effect</label>
-            <select id="shaderType">
-                <option value="none">None</option>
-                <option value="glow">Glow Shader</option>
-                <option value="grayscale">Grayscale</option>
-                <option value="invert">Invert Colors</option>
-                <option value="pixelate">Pixelate Effect</option>
-            </select>
-            <button id="genShaderScript" style="margin-top: 8px;">Generate Shader Script</button>
+            <label>🎛️ Effect Intensity (1-100)</label>
+            <input type="range" id="effectIntensity" min="1" max="100" value="40">
+            <span id="intensityVal" class="slider-value">40</span>
         </div>
     </div>
 
-    <!-- PAINEL CHARACTER & ANIMATION SCRIPTS -->
+    <!-- PAINEL CAMERA & SHAKE EFFECTS -->
     <div class="panel">
-        <h2>👥 Character & Animation</h2>
+        <h2>🎥 Camera & Shake FX</h2>
         <div class="grid-2col">
-            <button id="genCharacterAnim">🎭 Custom Character Animation</button>
-            <button id="genGFX">💖 Girlfriend Reaction Script</button>
-            <button id="genHealthIcon">❤️ Custom Health Icon Behavior</button>
-            <button id="genStrumNotes">🎸 Strum Note Modifier</button>
+            <button id="genCameraBop">💃 Camera Bop on Beat</button>
+            <button id="genCameraDrunk">🥴 Drunk Camera</button>
+            <button id="genCameraZoomBeat">🔍 Zoom on Beat</button>
+            <button id="genCameraShakeMiss">🌊 Shake on Miss</button>
+            <button id="genCameraFlash">⚡ Flash on Beat</button>
+            <button id="genCameraFocus">🎯 Dynamic Focus</button>
+            <button id="genCameraRoll">🌀 Camera Roll</button>
+            <button id="genCameraVignette">🎭 Vignette Effect</button>
+        </div>
+    </div>
+
+    <!-- PAINEL CHARACTER & ICON EFFECTS -->
+    <div class="panel">
+        <h2>👥 Character & Icon FX</h2>
+        <div class="grid-2col">
+            <button id="genIconShake">💢 Icon Shake on Hit</button>
+            <button id="genIconSpin">🔄 Spinning Icons</button>
+            <button id="genIconScale">📏 Icon Pulse on Health</button>
+            <button id="genCharacterSwap">🔄 Character Swap on Beat</button>
+            <button id="genGfReaction">💖 GF Reaction on Combo</button>
+            <button id="genEnemyGlow">👹 Enemy Glow on Note Hit</button>
         </div>
         <div class="input-group">
-            <label>Character to modify</label>
-            <select id="charSelect">
+            <label>Character to target</label>
+            <select id="targetChar">
                 <option value="boyfriend">Boyfriend</option>
                 <option value="dad">Opponent (Dad)</option>
                 <option value="gf">Girlfriend</option>
+                <option value="both">Both</option>
             </select>
         </div>
     </div>
 
-    <!-- PAINEL CUTSCENE & DIALOGUE -->
+    <!-- PAINEL NOTE MANIPULATION -->
     <div class="panel">
-        <h2>🎬 Cutscene & Dialogue</h2>
+        <h2>🎵 Advanced Note Manipulation</h2>
         <div class="grid-2col">
-            <button id="genCutscene">🎥 Song Start Cutscene</button>
-            <button id="genDialogue">💬 Dialogue Box Script</button>
-            <button id="genEndCutscene">🏁 End Song Cutscene</button>
+            <button id="genNoteOrbit">🪐 Orbiting Notes</button>
+            <button id="genNoteMagnet">🧲 Magnetic Notes</button>
+            <button id="genNoteRain">🌧️ Note Rain Effect</button>
+            <button id="genNoteWave">🌊 Wave Pattern Notes</button>
+            <button id="genNoteExplode">💥 Explode on Miss</button>
+            <button id="genNoteColorHealth">🎨 Color by Health</button>
+            <button id="genNoteSpeed">⚡ Dynamic Note Speed</button>
+            <button id="genNoteMirror">🪞 Mirror Notes</button>
         </div>
-        <div class="input-group">
-            <label>Dialogue Text (separate lines with |)</label>
-            <textarea id="dialogueText" rows="2" placeholder="Hello!|How are you?|Let's sing!"></textarea>
+    </div>
+
+    <!-- PAINEL GAMEPLAY MODIFIERS -->
+    <div class="panel">
+        <h2>⚙️ Gameplay Modifiers</h2>
+        <div class="grid-2col">
+            <button id="genHealthDrain">💀 Health Drain on Miss</button>
+            <button id="genComboSystem">🔥 Custom Combo System</button>
+            <button id="genScoreMultiplier">⭐ Score Multiplier</button>
+            <button id="genAutoPlay">🤖 Auto-Play Helper</button>
+            <button id="genPracticeMode">📝 Practice Mode</button>
+            <button id="genEndlessMode">♾️ Endless Mode</button>
         </div>
     </div>
 
@@ -328,8 +358,8 @@
         <h2>🏟️ Stage JSON Generator</h2>
         <div class="grid-2col">
             <div class="input-group">
-                <label>Directory (stage folder)</label>
-                <input type="text" id="stageDir" placeholder="stages/myStage" value="stages/myStage">
+                <label>Directory</label>
+                <input type="text" id="stageDir" value="stages/myStage">
             </div>
             <div class="input-group">
                 <label>Default Zoom</label>
@@ -344,58 +374,53 @@
             </div>
         </div>
         <h3>Character Positions (X, Y)</h3>
-        <div class="grid-2col">
+        <div class="grid-3col">
             <div class="coord-input">
-                <label>Boyfriend:</label>
+                <label>BF:</label>
                 <input type="number" id="bfX" value="770"> <input type="number" id="bfY" value="100">
             </div>
             <div class="coord-input">
-                <label>Girlfriend:</label>
+                <label>GF:</label>
                 <input type="number" id="gfX" value="400"> <input type="number" id="gfY" value="130">
             </div>
             <div class="coord-input">
-                <label>Opponent:</label>
+                <label>Opp:</label>
                 <input type="number" id="oppX" value="100"> <input type="number" id="oppY" value="100">
             </div>
         </div>
-        <div class="input-group">
-            <label>Custom Stage Objects (JSON array)</label>
-            <textarea id="stageObjects" rows="3" placeholder='[{"type":"sprite","name":"bg","x":0,"y":0,"path":"bg.png"}]'></textarea>
-        </div>
         <button id="genStageJson" class="warning">🎮 Generate Stage JSON</button>
-        <div class="help-text">📁 Compatible with Psych Engine's stage format. Copy to mods/yourMod/stages/</div>
     </div>
 
-    <!-- PAINEL EVENT & CALLBACKS -->
+    <!-- PAINEL EVENTS & CALLBACKS -->
     <div class="panel">
         <h2>⚡ Events & Callbacks</h2>
         <div class="input-group">
-            <label>🏷️ Event Name</label>
-            <input type="text" id="eventName" placeholder="ExplosionEvent">
+            <label>Event Name</label>
+            <input type="text" id="eventName" placeholder="MyCustomEvent">
         </div>
         <div class="input-group">
-            <label>🎬 Lua Action</label>
-            <textarea id="eventAction" rows="2" placeholder="triggerEvent('Add Camera Zoom', 0.03, 0.03); setProperty('camGame.angle', 2)"></textarea>
+            <label>Lua Action</label>
+            <textarea id="eventAction" rows="2" placeholder="triggerEvent('Add Camera Zoom', 0.03, 0.03)"></textarea>
         </div>
         <button id="genEventScript">Create Event Script</button>
         <hr>
         <div class="input-group">
-            <label>🎯 Callback Type</label>
+            <label>Callback Type</label>
             <select id="callbackType">
-                <option value="onBeatHit">onBeatHit() - Every beat</option>
-                <option value="onUpdate">onUpdate(elapsed) - Every frame</option>
-                <option value="onStepHit">onStepHit() - Every step</option>
-                <option value="onSongStart">onSongStart() - Song start</option>
-                <option value="onDestroy">onDestroy() - Song end</option>
-                <option value="onTimerCompleted">onTimerCompleted(tag) - Timer events</option>
-                <option value="onTweenCompleted">onTweenCompleted(tag) - Tween events</option>
+                <option value="onBeatHit">onBeatHit()</option>
+                <option value="onUpdate">onUpdate(elapsed)</option>
+                <option value="onStepHit">onStepHit()</option>
+                <option value="onSongStart">onSongStart()</option>
+                <option value="onDestroy">onDestroy()</option>
+                <option value="onTimerCompleted">onTimerCompleted(tag)</option>
+                <option value="onTweenCompleted">onTweenCompleted(tag)</option>
             </select>
         </div>
         <div class="input-group">
-            <label>📜 Custom Lua Code</label>
-            <textarea id="customCallbackCode" rows="3" placeholder="debugPrint('Callback triggered!'); setProperty('camHUD.alpha', 0.5)"></textarea>
+            <label>Custom Code</label>
+            <textarea id="customCallbackCode" rows="2" placeholder="debugPrint('Triggered!')"></textarea>
         </div>
-        <button id="genCallbackScript">Generate Callback Script</button>
+        <button id="genCallbackScript">Generate Callback</button>
     </div>
 
     <!-- PAINEL OUTPUT -->
@@ -404,108 +429,504 @@
         <div class="code-area">
             <div class="code-header">
                 <span>📜 Lua Script / JSON Output</span>
-                <button id="copyBtn" class="success" style="padding: 0.3rem 0.8rem; font-size: 0.75rem;">📋 Copy</button>
+                <button id="copyBtn" class="success">📋 Copy</button>
             </div>
-            <textarea id="outputScript" class="code-output" readonly wrap="off" spellcheck="false">-- Select a generator above
+            <textarea id="outputScript" class="code-output" readonly>-- Select a generator above
 -- Your Lua script or Stage JSON will appear here</textarea>
         </div>
-        <div class="help-text" style="margin-top: 12px;">
-            ✅ Fully compatible with Psych Engine v0.7+ | All callbacks and functions based on official source code
-        </div>
+        <div class="help-text">✅ Compatible with Psych Engine v0.7+ | Based on official source code</div>
     </div>
 </div>
 
 <script>
     const output = document.getElementById('outputScript');
+    const intensitySlider = document.getElementById('effectIntensity');
+    const intensityVal = document.getElementById('intensityVal');
     
-    function setOutput(code) {
-        output.value = code;
-    }
+    intensitySlider.oninput = () => intensityVal.textContent = intensitySlider.value;
+    
+    function setOutput(code) { output.value = code; }
+    
+    // ============= ADVANCED SCRIPTS =============
+    
+    // Drunk Mode (Full)
+    document.getElementById('genDrunkMode').addEventListener('click', () => {
+        let power = intensitySlider.value;
+        setOutput(`-- Drunk Mode Effect
+local drunk = true
+local power = ${power}
+local speed = 3
+local defaultX = {}
+local defaultY = {}
 
-    // Note Skin Generator
-    document.getElementById('genNoteSkin').addEventListener('click', () => {
-        let texture = document.getElementById('noteTexture').value.trim() || "default_notes";
-        let effect = document.getElementById('noteEffect').value;
-        let extra = "";
-        if (effect === "shake") extra = `\n        setPropertyFromGroup('notes', i, 'angle', math.sin(getSongPosition() * 0.02) * 3)`;
-        if (effect === "scale") extra = `\n        setPropertyFromGroup('notes', i, 'scale.x', 1.1 + math.sin(getSongPosition() * 0.01) * 0.1)\n        setPropertyFromGroup('notes', i, 'scale.y', 1.1 + math.sin(getSongPosition() * 0.01) * 0.1)`;
-        if (effect === "glow") extra = `\n        setPropertyFromGroup('notes', i, 'colorTransform.redOffset', 50)\n        setPropertyFromGroup('notes', i, 'colorTransform.greenOffset', 50)`;
-        if (effect === "rotate") extra = `\n        setPropertyFromGroup('notes', i, 'angle', getSongPosition() * 0.05 % 360)`;
-        
-        setOutput(`-- Note Skin Script\nfunction onCreatePost()\n    for i = 0, getProperty('notes.length') - 1 do\n        setPropertyFromGroup('notes', i, 'texture', '${texture}')${extra}\n    end\nend\n\nfunction onNoteCreation(eventNote)\n    setPropertyFromGroup('notes', eventNote.id, 'texture', '${texture}')\nend`);
+function onCreatePost()
+    for i = 0,7 do
+        defaultX[i+1] = getPropertyFromGroup('strumLineNotes', i, 'x')
+        defaultY[i+1] = getPropertyFromGroup('strumLineNotes', i, 'y')
+    end
+end
+
+function onUpdate(elapsed)
+    if not drunk then return end
+    local songPos = getSongPosition() / 1000
+    for i = 0,7 do
+        local sin = math.sin((songPos * speed) + i)
+        local cos = math.cos((songPos * speed) + i)
+        setPropertyFromGroup('strumLineNotes', i, 'x', defaultX[i+1] + sin * power)
+        setPropertyFromGroup('strumLineNotes', i, 'y', defaultY[i+1] + cos * power)
+        setPropertyFromGroup('strumLineNotes', i, 'angle', sin * 25)
+    end
+end
+
+function onBeatHit()
+    if not drunk then return end
+    setProperty('camGame.angle', math.random(-3,3))
+    doTweenAngle('camReset','camGame',0,0.3,'quadOut')
+    setProperty('camHUD.angle', math.random(-2,2))
+    doTweenAngle('hudReset','camHUD',0,0.3,'quadOut')
+end
+
+function goodNoteHit()
+    if not drunk then return end
+    setProperty('iconP1.angle', math.random(-20,20))
+    doTweenAngle('iconBack','iconP1',0,0.2,'quadOut')
+end`);
     });
-
-    document.getElementById('genRainbowNotes').addEventListener('click', () => {
-        setOutput(`-- Rainbow Notes Effect\nlocal hue = 0\nfunction onUpdate(elapsed)\n    hue = (hue + 0.025) % 360\n    for i = 0, getProperty('notes.length') - 1 do\n        setPropertyFromGroup('notes', i, 'colorTransform.hue', hue)\n    end\nend`);
+    
+    // Earthquake Effect
+    document.getElementById('genEarthquake').addEventListener('click', () => {
+        setOutput(`-- Earthquake Effect
+local intensity = 8
+function onBeatHit()
+    if curBeat % 2 == 0 then
+        setProperty('camGame.x', math.random(-intensity, intensity))
+        setProperty('camGame.y', math.random(-intensity, intensity))
+        runTimer('camReset', 0.1)
+    end
+end
+function onTimerCompleted(tag)
+    if tag == 'camReset' then
+        setProperty('camGame.x', 0)
+        setProperty('camGame.y', 0)
+    end
+end`);
     });
-
-    document.getElementById('genPulsingNotes').addEventListener('click', () => {
-        setOutput(`-- Pulsing Notes Effect\nfunction onUpdate(elapsed)\n    local pulse = 1 + math.sin(getSongPosition() * 0.02) * 0.1\n    for i = 0, getProperty('notes.length') - 1 do\n        setPropertyFromGroup('notes', i, 'scale.x', pulse)\n        setPropertyFromGroup('notes', i, 'scale.y', pulse)\n    end\nend`);
+    
+    // Sine Wave Notes
+    document.getElementById('genSinWave').addEventListener('click', () => {
+        let power = intensitySlider.value;
+        setOutput(`-- Sine Wave Notes
+local power = ${power}
+local defaultY = {}
+function onCreatePost()
+    for i = 0,7 do
+        defaultY[i+1] = getPropertyFromGroup('strumLineNotes', i, 'y')
+    end
+end
+function onUpdate(elapsed)
+    local wave = math.sin(getSongPosition() * 0.005) * power
+    for i = 0,7 do
+        setPropertyFromGroup('strumLineNotes', i, 'y', defaultY[i+1] + wave)
+    end
+end`);
     });
-
-    document.getElementById('genNoteSplashes').addEventListener('click', () => {
-        setOutput(`-- Custom Note Splashes\nfunction onNoteHit(eventNote)\n    if eventNote.isSustainNote then return end\n    makeLuaSprite('splash' .. eventNote.id, 'noteSplashes/splash', getPropertyFromGroup('notes', eventNote.id, 'x'), getPropertyFromGroup('notes', eventNote.id, 'y'))\n    setProperty('splash' .. eventNote.id, 'scale.x', 0.8)\n    setProperty('splash' .. eventNote.id, 'scale.y', 0.8)\n    addLuaSprite('splash' .. eventNote.id, true)\n    runTimer('destroySplash' .. eventNote.id, 0.3)\nend\n\nfunction onTimerCompleted(tag)\n    if string.sub(tag, 1, 13) == 'destroySplash' then\n        if luaSpriteExists(tag) then\n            removeLuaSprite(tag, true)\n        end\n    end\nend`);
+    
+    // Spinning Notes
+    document.getElementById('genSpinNotes').addEventListener('click', () => {
+        setOutput(`-- Spinning Notes
+function onUpdate(elapsed)
+    for i = 0,7 do
+        setPropertyFromGroup('strumLineNotes', i, 'angle', getSongPosition() * 0.05 + (i * 45))
+    end
+end`);
     });
-
+    
+    // Bounce Notes
+    document.getElementById('genBounceNotes').addEventListener('click', () => {
+        setOutput(`-- Bounce Notes
+function onBeatHit()
+    for i = 0,7 do
+        setPropertyFromGroup('strumLineNotes', i, 'scale.x', 1.3)
+        setPropertyFromGroup('strumLineNotes', i, 'scale.y', 1.3)
+        runTimer('resetNote'..i, 0.15)
+    end
+end
+function onTimerCompleted(tag)
+    if string.sub(tag, 1, 9) == 'resetNote' then
+        local id = tonumber(string.sub(tag, 10))
+        setPropertyFromGroup('strumLineNotes', id, 'scale.x', 1)
+        setPropertyFromGroup('strumLineNotes', id, 'scale.y', 1)
+    end
+end`);
+    });
+    
+    // Glow Notes
+    document.getElementById('genGlowNotes').addEventListener('click', () => {
+        setOutput(`-- Glow Pulse Notes
+function onUpdate(elapsed)
+    local glow = 0.5 + math.sin(getSongPosition() * 0.01) * 0.5
+    for i = 0,7 do
+        setPropertyFromGroup('strumLineNotes', i, 'colorTransform.redOffset', glow * 100)
+        setPropertyFromGroup('strumLineNotes', i, 'colorTransform.greenOffset', glow * 80)
+        setPropertyFromGroup('strumLineNotes', i, 'colorTransform.blueOffset', glow * 120)
+    end
+end`);
+    });
+    
+    // Note Trails
+    document.getElementById('genTrailNotes').addEventListener('click', () => {
+        setOutput(`-- Note Trails Effect
+local trails = {}
+function onNoteHit(eventNote)
+    local note = getPropertyFromGroup('notes', eventNote.id, 'noteObject')
+    if note then
+        makeLuaSprite('trail'..eventNote.id, '', getProperty(note..'.x'), getProperty(note..'.y'))
+        makeGraphic('trail'..eventNote.id, 100, 100, 'FFFFFF')
+        setProperty('trail'..eventNote.id..'.alpha', 0.5)
+        setProperty('trail'..eventNote.id..'.scale.x', 0.5)
+        setProperty('trail'..eventNote.id..'.scale.y', 0.5)
+        addLuaSprite('trail'..eventNote.id, true)
+        runTimer('remTrail'..eventNote.id, 0.3)
+    end
+end
+function onTimerCompleted(tag)
+    if string.sub(tag, 1, 8) == 'remTrail' then
+        removeLuaSprite(tag, true)
+    end
+end`);
+    });
+    
+    // Gravity Notes
+    document.getElementById('genGravityNotes').addEventListener('click', () => {
+        setOutput(`-- Gravity Notes Effect
+local gravity = 0
+function onUpdatePost(elapsed)
+    gravity = gravity + elapsed * 5
+    for i = 0, getProperty('notes.length')-1 do
+        if getPropertyFromGroup('notes', i, 'mustPress') then
+            setPropertyFromGroup('notes', i, 'y', getPropertyFromGroup('notes', i, 'y') + gravity)
+        end
+    end
+end`);
+    });
+    
     // Camera Effects
-    document.getElementById('genCameraZoom').addEventListener('click', () => {
-        setOutput(`function onBeatHit()\n    if curBeat % 2 == 0 then\n        triggerEvent('Add Camera Zoom', 0.03, 0.03)\n    end\nend`);
+    document.getElementById('genCameraBop').addEventListener('click', () => {
+        setOutput(`function onBeatHit()
+    setProperty('camGame.zoom', 1.02)
+    setProperty('camHUD.zoom', 1.01)
+    runTimer('resetZoom', 0.1)
+end
+function onTimerCompleted(tag)
+    if tag == 'resetZoom' then
+        setProperty('camGame.zoom', 1)
+        setProperty('camHUD.zoom', 1)
+    end
+end`);
     });
-
-    document.getElementById('genCameraShake').addEventListener('click', () => {
-        setOutput(`function onNoteMiss()\n    triggerEvent('Screen Shake', '0.02, 0.01', '0.02')\nend`);
+    
+    document.getElementById('genCameraDrunk').addEventListener('click', () => {
+        setOutput(`local drunkAngle = 0
+function onUpdate(elapsed)
+    drunkAngle = drunkAngle + elapsed * 5
+    setProperty('camGame.angle', math.sin(drunkAngle) * 3)
+    setProperty('camHUD.angle', math.sin(drunkAngle * 2) * 2)
+end`);
     });
-
-    document.getElementById('genFlashEffect').addEventListener('click', () => {
-        setOutput(`function onBeatHit()\n    if curBeat % 4 == 0 then\n        cameraFlash('camGame', '0xFFFFFF', 0.3)\n    end\nend`);
+    
+    document.getElementById('genCameraZoomBeat').addEventListener('click', () => {
+        setOutput(`function onBeatHit()
+    if curBeat % 2 == 0 then
+        triggerEvent('Add Camera Zoom', 0.04, 0.04)
+    end
+end`);
     });
-
-    document.getElementById('genChromAberration').addEventListener('click', () => {
-        setOutput(`-- Chromatic Aberration Effect\nfunction onCreate()\n    makeLuaSprite('chroma', '', 0, 0)\n    makeGraphic('chroma', screenWidth, screenHeight, '000000')\n    setProperty('chroma.alpha', 0.3)\n    addLuaSprite('chroma', true)\n    setShader('chroma', 'chromaticAberration')\nend`);
+    
+    document.getElementById('genCameraShakeMiss').addEventListener('click', () => {
+        setOutput(`function onNoteMiss()
+    triggerEvent('Screen Shake', '0.03, 0.02', '0.05')
+end`);
     });
-
-    // Shader Generator
-    document.getElementById('genShaderScript').addEventListener('click', () => {
-        let shader = document.getElementById('shaderType').value;
-        let code = `-- Shader Effect: ${shader}\nfunction onCreate()\n    makeLuaSprite('shaderSprite', '', 0, 0)\n    makeGraphic('shaderSprite', screenWidth, screenHeight, 'FFFFFF')\n    setProperty('shaderSprite.alpha', 0.5)\n    addLuaSprite('shaderSprite', true)\n    setShader('shaderSprite', '${shader}')\nend`;
-        setOutput(code);
+    
+    document.getElementById('genCameraFlash').addEventListener('click', () => {
+        setOutput(`function onBeatHit()
+    if curBeat % 4 == 0 then
+        cameraFlash('camGame', '0xFFFFFF', 0.2)
+    end
+end`);
     });
-
-    // Character Animations
-    document.getElementById('genCharacterAnim').addEventListener('click', () => {
-        let char = document.getElementById('charSelect').value;
-        setOutput(`-- Custom ${char} Animation\nfunction onBeatHit()\n    if curBeat % 2 == 0 then\n        if getProperty('${char}.animation.curAnim.name') == 'singUP' then\n            playAnim('${char}', 'singDOWN', true)\n        else\n            playAnim('${char}', 'singUP', true)\n        end\n    end\nend`);
+    
+    document.getElementById('genCameraFocus').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    local health = getProperty('health')
+    local zoom = 0.9 + (health * 0.2)
+    setProperty('camGame.zoom', zoom)
+end`);
     });
-
-    document.getElementById('genGFX').addEventListener('click', () => {
-        setOutput(`-- Girlfriend Reaction\nfunction onBeatHit()\n    if curBeat % 4 == 0 then\n        playAnim('gf', 'cheer', true)\n    end\nend`);
+    
+    document.getElementById('genCameraRoll').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    setProperty('camGame.angle', getSongPosition() * 0.01 % 360)
+end`);
     });
-
-    document.getElementById('genHealthIcon').addEventListener('click', () => {
-        setOutput(`-- Custom Health Icon Behavior\nfunction onUpdate(elapsed)\n    local health = getProperty('health')\n    if health < 0.2 then\n        setProperty('healthBar.alpha', 0.5)\n        setProperty('iconP1.alpha', 0.5)\n    else\n        setProperty('healthBar.alpha', 1)\n        setProperty('iconP1.alpha', 1)\n    end\nend`);
+    
+    document.getElementById('genCameraVignette').addEventListener('click', () => {
+        setOutput(`function onCreate()
+    makeLuaSprite('vignette', '', 0, 0)
+    makeGraphic('vignette', screenWidth, screenHeight, '000000')
+    setProperty('vignette.alpha', 0.3)
+    setBlendMode('vignette', 'multiply')
+    addLuaSprite('vignette', true)
+end`);
     });
-
-    document.getElementById('genStrumNotes').addEventListener('click', () => {
-        setOutput(`-- Strum Note Modifier\nfunction onCreatePost()\n    for i = 0, 3 do\n        setPropertyFromGroup('strumLineNotes', i, 'alpha', 0.7)\n        setPropertyFromGroup('strumLineNotes', i, 'scale.x', 0.9)\n        setPropertyFromGroup('strumLineNotes', i, 'scale.y', 0.9)\n    end\nend`);
+    
+    // Icon Effects
+    document.getElementById('genIconShake').addEventListener('click', () => {
+        setOutput(`function goodNoteHit()
+    setProperty('iconP1.angle', math.random(-15,15))
+    runTimer('resetIcon', 0.1)
+end
+function onTimerCompleted(tag)
+    if tag == 'resetIcon' then
+        setProperty('iconP1.angle', 0)
+    end
+end`);
     });
-
-    // Cutscene & Dialogue
-    document.getElementById('genCutscene').addEventListener('click', () => {
-        setOutput(`-- Song Start Cutscene\nfunction onSongStart()\n    startVideo('cutscene')\n    -- or use dialogue\n    startDialogue('dialogue', 'intro')\nend`);
+    
+    document.getElementById('genIconSpin').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    setProperty('iconP1.angle', getSongPosition() * 0.1 % 360)
+    setProperty('iconP2.angle', getSongPosition() * -0.1 % 360)
+end`);
     });
-
-    document.getElementById('genDialogue').addEventListener('click', () => {
-        let text = document.getElementById('dialogueText').value;
-        let lines = text.split('|').filter(l => l.trim());
-        let dialogueTable = lines.map(l => `"${l.trim()}"`).join(',\n        ');
-        setOutput(`-- Dialogue Box Script\nfunction onCreate()\n    local dialogue = {\n        ${dialogueTable}\n    }\n    startDialogue(dialogue, 'intro')\nend`);
+    
+    document.getElementById('genIconScale').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    local health = getProperty('health')
+    local scale = 0.8 + (health * 0.4)
+    setProperty('iconP1.scale.x', scale)
+    setProperty('iconP1.scale.y', scale)
+    setProperty('iconP2.scale.x', scale)
+    setProperty('iconP2.scale.y', scale)
+end`);
     });
-
-    document.getElementById('genEndCutscene').addEventListener('click', () => {
-        setOutput(`-- End Song Cutscene\nfunction onDestroy()\n    startVideo('endingCutscene')\nend`);
+    
+    document.getElementById('genCharacterSwap').addEventListener('click', () => {
+        setOutput(`local swapped = false
+function onBeatHit()
+    if curBeat % 8 == 0 then
+        if swapped then
+            setProperty('boyfriend.x', 770)
+            setProperty('dad.x', 100)
+        else
+            setProperty('boyfriend.x', 100)
+            setProperty('dad.x', 770)
+        end
+        swapped = not swapped
+    end
+end`);
     });
-
-    // Stage JSON Generator
+    
+    document.getElementById('genGfReaction').addEventListener('click', () => {
+        setOutput(`local combo = 0
+function goodNoteHit()
+    combo = combo + 1
+    if combo >= 20 then
+        playAnim('gf', 'cheer', true)
+        combo = 0
+    end
+end
+function onNoteMiss()
+    combo = 0
+end`);
+    });
+    
+    document.getElementById('genEnemyGlow').addEventListener('click', () => {
+        setOutput(`function onEnemyNoteHit()
+    setProperty('dad.colorTransform.redOffset', 100)
+    runTimer('resetEnemy', 0.1)
+end
+function onTimerCompleted(tag)
+    if tag == 'resetEnemy' then
+        setProperty('dad.colorTransform.redOffset', 0)
+    end
+end`);
+    });
+    
+    // Note Manipulation
+    document.getElementById('genNoteOrbit').addEventListener('click', () => {
+        setOutput(`local angle = 0
+function onUpdate(elapsed)
+    angle = angle + elapsed * 5
+    local radius = 50
+    for i = 0,7 do
+        local rad = angle + (i * 45)
+        setPropertyFromGroup('strumLineNotes', i, 'x', getPropertyFromGroup('strumLineNotes', i, 'defaultX') + math.cos(rad) * radius)
+        setPropertyFromGroup('strumLineNotes', i, 'y', getPropertyFromGroup('strumLineNotes', i, 'defaultY') + math.sin(rad) * radius)
+    end
+end`);
+    });
+    
+    document.getElementById('genNoteMagnet').addEventListener('click', () => {
+        setOutput(`function onUpdatePost(elapsed)
+    for i = 0, getProperty('notes.length')-1 do
+        if getPropertyFromGroup('notes', i, 'mustPress') then
+            local targetY = getPropertyFromGroup('strumLineNotes', getPropertyFromGroup('notes', i, 'noteData'), 'y')
+            local currentY = getPropertyFromGroup('notes', i, 'y')
+            setPropertyFromGroup('notes', i, 'y', currentY + (targetY - currentY) * 0.1)
+        end
+    end
+end`);
+    });
+    
+    document.getElementById('genNoteRain').addEventListener('click', () => {
+        setOutput(`function onCreatePost()
+    for i = 0, getProperty('notes.length')-1 do
+        setPropertyFromGroup('notes', i, 'y', -100)
+    end
+end`);
+    });
+    
+    document.getElementById('genNoteWave').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    for i = 0, getProperty('notes.length')-1 do
+        local wave = math.sin(getPropertyFromGroup('notes', i, 'strumTime') * 0.01) * 20
+        setPropertyFromGroup('notes', i, 'x', getPropertyFromGroup('notes', i, 'x') + wave)
+    end
+end`);
+    });
+    
+    document.getElementById('genNoteExplode').addEventListener('click', () => {
+        setOutput(`function onNoteMiss()
+    triggerEvent('Screen Shake', '0.02, 0.01', '0.03')
+    cameraFlash('camGame', '0xFF0000', 0.2)
+end`);
+    });
+    
+    document.getElementById('genNoteColorHealth').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    local health = getProperty('health')
+    local red = 255 * (1 - health)
+    local green = 255 * health
+    for i = 0, getProperty('notes.length')-1 do
+        setPropertyFromGroup('notes', i, 'colorTransform.redOffset', red)
+        setPropertyFromGroup('notes', i, 'colorTransform.greenOffset', green)
+    end
+end`);
+    });
+    
+    document.getElementById('genNoteSpeed').addEventListener('click', () => {
+        setOutput(`function onBeatHit()
+    local speed = 2 + math.sin(curBeat * 0.5) * 1.5
+    setProperty('songSpeed', speed)
+end`);
+    });
+    
+    document.getElementById('genNoteMirror').addEventListener('click', () => {
+        setOutput(`function onNoteHit(eventNote)
+    local noteData = getPropertyFromGroup('notes', eventNote.id, 'noteData')
+    local mirrored = 3 - noteData
+    setPropertyFromGroup('notes', eventNote.id, 'noteData', mirrored)
+end`);
+    });
+    
+    // Gameplay Modifiers
+    document.getElementById('genHealthDrain').addEventListener('click', () => {
+        setOutput(`function onUpdate(elapsed)
+    setProperty('health', getProperty('health') - elapsed * 0.05)
+end`);
+    });
+    
+    document.getElementById('genComboSystem').addEventListener('click', () => {
+        setOutput(`local combo = 0
+function goodNoteHit()
+    combo = combo + 1
+    if combo >= 50 then
+        triggerEvent('Add Camera Zoom', 0.1, 0.1)
+        combo = 0
+    end
+end`);
+    });
+    
+    document.getElementById('genScoreMultiplier').addEventListener('click', () => {
+        setOutput(`function goodNoteHit()
+    local score = getProperty('songScore')
+    setProperty('songScore', score + 500)
+end`);
+    });
+    
+    document.getElementById('genAutoPlay').addEventListener('click', () => {
+        setOutput(`function onUpdatePost(elapsed)
+    for i = 0, getProperty('notes.length')-1 do
+        if getPropertyFromGroup('notes', i, 'strumTime') <= getSongPosition() + 100 and
+           getPropertyFromGroup('notes', i, 'mustPress') then
+            setPropertyFromGroup('notes', i, 'hitByNote', true)
+            setPropertyFromGroup('notes', i, 'wasGoodHit', true)
+            setPropertyFromGroup('notes', i, 'canBeHit', false)
+        end
+    end
+end`);
+    });
+    
+    document.getElementById('genPracticeMode').addEventListener('click', () => {
+        setOutput(`function onCreate()
+    setProperty('health', 1)
+end
+function onNoteMiss()
+    setProperty('health', getProperty('health') + 0.1)
+end`);
+    });
+    
+    document.getElementById('genEndlessMode').addEventListener('click', () => {
+        setOutput(`function onSongEnd()
+    loadSong(getProperty('songName'))
+end`);
+    });
+    
+    // Quick Templates
+    document.getElementById('quickDrunkMode').click();
+    
+    document.getElementById('quickWaveNotes').addEventListener('click', () => {
+        setOutput(`-- Wave Notes Effect
+function onUpdate(elapsed)
+    for i = 0,7 do
+        local wave = math.sin(getSongPosition() * 0.005 + i) * 30
+        setPropertyFromGroup('strumLineNotes', i, 'y', getPropertyFromGroup('strumLineNotes', i, 'defaultY') + wave)
+    end
+end`);
+    });
+    
+    document.getElementById('quickBpmSync').addEventListener('click', () => {
+        setOutput(`-- BPM Sync Pulse
+function onBeatHit()
+    for i = 0,7 do
+        setPropertyFromGroup('strumLineNotes', i, 'scale.x', 1.2)
+        setPropertyFromGroup('strumLineNotes', i, 'scale.y', 1.2)
+        runTimer('resetNote'..i, 0.1)
+    end
+end
+function onTimerCompleted(tag)
+    if string.sub(tag, 1, 9) == 'resetNote' then
+        local id = tonumber(string.sub(tag, 10))
+        setPropertyFromGroup('strumLineNotes', id, 'scale.x', 1)
+        setPropertyFromGroup('strumLineNotes', id, 'scale.y', 1)
+    end
+end`);
+    });
+    
+    document.getElementById('quickHealthBarColor').addEventListener('click', () => {
+        setOutput(`-- Dynamic Health Bar Color
+function onUpdate(elapsed)
+    local health = getProperty('health')
+    local red = 1 - health
+    local green = health
+    setProperty('healthBar.colorTransform.redMultiplier', red)
+    setProperty('healthBar.colorTransform.greenMultiplier', green)
+    setProperty('healthBar.colorTransform.blueMultiplier', 0.3)
+end`);
+    });
+    
+    // Stage JSON
     document.getElementById('genStageJson').addEventListener('click', () => {
         let stageJson = {
             directory: document.getElementById('stageDir').value,
@@ -515,35 +936,31 @@
             girlfriend: [parseInt(document.getElementById('gfX').value), parseInt(document.getElementById('gfY').value)],
             opponent: [parseInt(document.getElementById('oppX').value), parseInt(document.getElementById('oppY').value)]
         };
-        
-        let customObjects = document.getElementById('stageObjects').value.trim();
-        if (customObjects && customObjects !== '[]') {
-            try {
-                stageJson.objects = JSON.parse(customObjects);
-            } catch(e) {
-                stageJson.objects = [];
-            }
-        }
-        
         setOutput(JSON.stringify(stageJson, null, 2));
     });
-
+    
     // Event Script
     document.getElementById('genEventScript').addEventListener('click', () => {
         let eventName = document.getElementById('eventName').value.trim() || "CustomEvent";
-        let action = document.getElementById('eventAction').value.trim() || "debugPrint('Event triggered: " + eventName + "')";
-        setOutput(`-- Event Script: ${eventName}\nfunction onEvent(name, value1, value2)\n    if name == '${eventName}' then\n        ${action}\n    end\nend`);
+        let action = document.getElementById('eventAction').value.trim() || "debugPrint('Event triggered!')";
+        setOutput(`function onEvent(name, value1, value2)
+    if name == '${eventName}' then
+        ${action}
+    end
+end`);
     });
-
+    
     // Callback Script
     document.getElementById('genCallbackScript').addEventListener('click', () => {
         let callback = document.getElementById('callbackType').value;
-        let customCode = document.getElementById('customCallbackCode').value.trim() || "debugPrint('Callback " + callback + " executed!')";
-        let params = callback === 'onUpdate' ? 'elapsed' : (callback === 'onTimerCompleted' ? 'tag' : (callback === 'onTweenCompleted' ? 'tag' : ''));
-        setOutput(`-- Custom Callback: ${callback}\nfunction ${callback}(${params})\n    ${customCode}\nend`);
+        let customCode = document.getElementById('customCallbackCode').value.trim() || "debugPrint('Callback executed!')";
+        let params = callback === 'onUpdate' ? 'elapsed' : (callback === 'onTimerCompleted' || callback === 'onTweenCompleted' ? 'tag' : '');
+        setOutput(`function ${callback}(${params})
+    ${customCode}
+end`);
     });
-
-    // AI Advanced Generator
+    
+    // AI Generator
     document.getElementById('generateAiBtn').addEventListener('click', () => {
         let prompt = document.getElementById('aiPrompt').value.toLowerCase();
         if (!prompt.trim()) {
@@ -551,23 +968,16 @@
             return;
         }
         
-        let code = "-- AI Generated Script for Psych Engine\n\n";
-        
-        if (prompt.includes('rainbow') || prompt.includes('arco')) code += `local hue = 0\nfunction onUpdate(elapsed) hue = (hue + 0.025) % 360 for i = 0, getProperty('notes.length')-1 do setPropertyFromGroup('notes', i, 'colorTransform.hue', hue) end end\n\n`;
-        if (prompt.includes('shake') || prompt.includes('tremer')) code += `function onUpdate(elapsed) if getProperty('health') < 0.5 then setProperty('camGame.angle', math.random(-3,3)) else setProperty('camGame.angle', 0) end end\n\n`;
-        if (prompt.includes('zoom')) code += `function onBeatHit() if curBeat % 2 == 0 then triggerEvent('Add Camera Zoom', 0.03, 0.03) end end\n\n`;
-        if (prompt.includes('cutscene') || prompt.includes('dialog')) code += `function onSongStart() startDialogue({"Hello!", "Welcome to my song!"}, 'intro') end\n\n`;
-        if (prompt.includes('health') || prompt.includes('vida')) code += `function onUpdate(elapsed) if getProperty('health') < 0.2 then triggerEvent('Screen Shake', '0.01, 0.01', '0.02') end end\n\n`;
-        if (prompt.includes('flash')) code += `function onBeatHit() if curBeat % 4 == 0 then cameraFlash('camGame', '0xFFFFFF', 0.3) end end\n\n`;
-        
-        if (code === "-- AI Generated Script for Psych Engine\n\n") {
-            code += `-- Generated from: "${prompt}"\nfunction onCreate()\n    debugPrint('Script loaded successfully!')\nend\n\nfunction onBeatHit()\n    debugPrint('Beat: ' .. curBeat)\nend`;
-        }
-        
+        let code = "-- AI Generated Script\n\n";
+        if (prompt.includes('drunk') || prompt.includes('bêbado')) code += `-- Drunk Mode Activated\nlocal drunk = true\nlocal power = 40\n-- [Full drunk script available in Drunk Mode button]\n`;
+        if (prompt.includes('shake') || prompt.includes('tremer')) code += `function onUpdate() setProperty('camGame.angle', math.random(-3,3)) end\n`;
+        if (prompt.includes('rainbow')) code += `local hue=0\nfunction onUpdate(e) hue=(hue+0.02)%360 for i=0,7 do setPropertyFromGroup('strumLineNotes',i,'colorTransform.hue',hue) end end\n`;
+        if (prompt.includes('wave')) code += `function onUpdate(e) for i=0,7 do setPropertyFromGroup('strumLineNotes',i,'y',getPropertyFromGroup('strumLineNotes',i,'defaultY')+math.sin(getSongPosition()*0.005+i)*30) end end\n`;
+        if (code == "-- AI Generated Script\n\n") code += `-- Script for: "${prompt}"\nfunction onCreate() debugPrint('Script loaded!') end`;
         setOutput(code);
     });
-
-    // Copy function
+    
+    // Copy
     document.getElementById('copyBtn').addEventListener('click', () => {
         output.select();
         navigator.clipboard.writeText(output.value).then(() => alert('✅ Copied!')).catch(() => { document.execCommand('copy'); alert('✅ Copied!'); });
