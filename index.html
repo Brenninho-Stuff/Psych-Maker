@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Psych Maker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, Arial, sans-serif;
+            background: #0a0f1e;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #2d3a5e;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: #94a3b8;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .panel {
+            flex: 1;
+            min-width: 350px;
+            background: #111827;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border: 1px solid #1f2a3e;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .panel:hover {
+            border-color: #3b82f6;
+        }
+
+        .panel h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .panel h3 {
+            font-size: 1.1rem;
+            margin: 1rem 0 0.75rem 0;
+            color: #cbd5e1;
+        }
+
+        .input-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0f172a;
+            border: 1px solid #2d3a5e;
+            border-radius: 0.75rem;
+            color: white;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            margin-right: 0.75rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+            box-shadow: 0 5px 12px rgba(59,130,246,0.3);
+        }
+
+        button.secondary {
+            background: linear-gradient(135deg, #475569, #334155);
+        }
+
+        button.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        button.warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .code-area {
+            background: #0f172a;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #2d3a5e;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #1e293b;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2d3a5e;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        textarea.code-output {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.85rem;
+            background: #0a0f1a;
+            height: 380px;
+            resize: vertical;
+            border-radius: 0;
+            border: none;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .badge {
+            background: #2563eb20;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            color: #60a5fa;
+        }
+
+        .grid-2col, .grid-3col {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .grid-2col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        hr {
+            border-color: #2d3a5e;
+            margin: 1rem 0;
+        }
+
+        .help-text {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .coord-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .coord-input input {
+            width: 80px;
+            text-align: center;
+        }
+
+        @media (max-width: 1200px) {
+            .container { flex-direction: column; padding: 1rem; }
+            .grid-2col, .grid-3col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>🎸 PSYCH MAKER</h1>
+    <p>Advanced Lua Script & Stage JSON Generator for Psych Engine | Based on ShadowMario/FNF-PsychEngine</p>
+</header>
+
+<div class="container">
+    <!-- PAINEL IA NATURAL LANGUAGE -->
+    <div class="panel">
+        <h2>🤖 AI Script Generator</h2>
+        <div class="input-group">
+            <label>📝 Describe your desired behavior (English or Portuguese)</label>
+            <textarea id="aiPrompt" rows="3" placeholder="Examples: 'create a script that makes the screen shake when health is low and notes become rainbow' or 'add a cutscene before the song starts with dialogue'"></textarea>
+        </div>
+        <button id="generateAiBtn">✨ Generate AI Script</button>
+        <div class="help-text">💡 Supports: note skins, camera effects, cutscenes, health events, shaders, character animations, and more!</div>
+    </div>
+
+    <!-- PAINEL NOTE SCRIPTS -->
+    <div class="panel">
+        <h2>🎨 Note & Visual Scripts</h2>
+        <div class="input-group">
+            <label>📁 Texture Name (e.g., 'noteSkins/custom_notes')</label>
+            <input type="text" id="noteTexture" placeholder="myCoolNotes" value="customNotes">
+        </div>
+        <div class="grid-2col">
+            <button id="genNoteSkin">Note Skin Script</button>
+            <button id="genRainbowNotes" class="secondary">🌈 Rainbow Notes</button>
+            <button id="genPulsingNotes" class="secondary">💫 Pulsing Notes</button>
+            <button id="genNoteSplashes" class="secondary">💥 Custom Note Splashes</button>
+        </div>
+        <div class="input-group">
+            <label>✨ Extra Effect</label>
+            <select id="noteEffect">
+                <option value="none">None</option>
+                <option value="shake">Shake on Beat</option>
+                <option value="scale">Scale on Hit</option>
+                <option value="glow">Glow Effect</option>
+                <option value="rotate">Rotating Notes</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- PAINEL CAMERA & VISUAL EFFECTS -->
+    <div class="panel">
+        <h2>🎥 Camera & Visual FX</h2>
+        <div class="grid-2col">
+            <button id="genCameraZoom">🔍 Camera Zoom on Beat</button>
+            <button id="genCameraShake">🌊 Camera Shake on Miss</button>
+            <button id="genFlashEffect">⚡ Flash on Beat</button>
+            <button id="genChromAberration">🌈 Chromatic Aberration</button>
+        </div>
+        <div class="input-group">
+            <label>🎨 Shader Effect</label>
+            <select id="shaderType">
+                <option value="none">None</option>
+                <option value="glow">Glow Shader</option>
+                <option value="grayscale">Grayscale</option>
+                <option value="invert">Invert Colors</option>
+                <option value="pixelate">Pixelate Effect</option>
+            </select>
+            <button id="genShaderScript" style="margin-top: 8px;">Generate Shader Script</button>
+        </div>
+    </div>
+
+    <!-- PAINEL CHARACTER & ANIMATION SCRIPTS -->
+    <div class="panel">
+        <h2>👥 Character & Animation</h2>
+        <div class="grid-2col">
+            <button id="genCharacterAnim">🎭 Custom Character Animation</button>
+            <button id="genGFX">💖 Girlfriend Reaction Script</button>
+            <button id="genHealthIcon">❤️ Custom Health Icon Behavior</button>
+            <button id="genStrumNotes">🎸 Strum Note Modifier</button>
+        </div>
+        <div class="input-group">
+            <label>Character to modify</label>
+            <select id="charSelect">
+                <option value="boyfriend">Boyfriend</option>
+                <option value="dad">Opponent (Dad)</option>
+                <option value="gf">Girlfriend</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- PAINEL CUTSCENE & DIALOGUE -->
+    <div class="panel">
+        <h2>🎬 Cutscene & Dialogue</h2>
+        <div class="grid-2col">
+            <button id="genCutscene">🎥 Song Start Cutscene</button>
+            <button id="genDialogue">💬 Dialogue Box Script</button>
+            <button id="genEndCutscene">🏁 End Song Cutscene</button>
+        </div>
+        <div class="input-group">
+            <label>Dialogue Text (separate lines with |)</label>
+            <textarea id="dialogueText" rows="2" placeholder="Hello!|How are you?|Let's sing!"></textarea>
+        </div>
+    </div>
+
+    <!-- PAINEL STAGE JSON GENERATOR -->
+    <div class="panel">
+        <h2>🏟️ Stage JSON Generator</h2>
+        <div class="grid-2col">
+            <div class="input-group">
+                <label>Directory (stage folder)</label>
+                <input type="text" id="stageDir" placeholder="stages/myStage" value="stages/myStage">
+            </div>
+            <div class="input-group">
+                <label>Default Zoom</label>
+                <input type="number" id="defaultZoom" step="0.05" value="0.9">
+            </div>
+            <div class="input-group">
+                <label>Pixel Stage?</label>
+                <select id="isPixelStage">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
+        </div>
+        <h3>Character Positions (X, Y)</h3>
+        <div class="grid-2col">
+            <div class="coord-input">
+                <label>Boyfriend:</label>
+                <input type="number" id="bfX" value="770"> <input type="number" id="bfY" value="100">
+            </div>
+            <div class="coord-input">
+                <label>Girlfriend:</label>
+                <input type="number" id="gfX" value="400"> <input type="number" id="gfY" value="130">
+            </div>
+            <div class="coord-input">
+                <label>Opponent:</label>
+                <input type="number" id="oppX" value="100"> <input type="number" id="oppY" value="100">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Custom Stage Objects (JSON array)</label>
+            <textarea id="stageObjects" rows="3" placeholder='[{"type":"sprite","name":"bg","x":0,"y":0,"path":"bg.png"}]'></textarea>
+        </div>
+        <button id="genStageJson" class="warning">🎮 Generate Stage JSON</button>
+        <div class="help-text">📁 Compatible with Psych Engine's stage format. Copy to mods/yourMod/stages/</div>
+    </div>
+
+    <!-- PAINEL EVENT & CALLBACKS -->
+    <div class="panel">
+        <h2>⚡ Events & Callbacks</h2>
+        <div class="input-group">
+            <label>🏷️ Event Name</label>
+            <input type="text" id="eventName" placeholder="ExplosionEvent">
+        </div>
+        <div class="input-group">
+            <label>🎬 Lua Action</label>
+            <textarea id="eventAction" rows="2" placeholder="triggerEvent('Add Camera Zoom', 0.03, 0.03); setProperty('camGame.angle', 2)"></textarea>
+        </div>
+        <button id="genEventScript">Create Event Script</button>
+        <hr>
+        <div class="input-group">
+            <label>🎯 Callback Type</label>
+            <select id="callbackType">
+                <option value="onBeatHit">onBeatHit() - Every beat</option>
+                <option value="onUpdate">onUpdate(elapsed) - Every frame</option>
+                <option value="onStepHit">onStepHit() - Every step</option>
+                <option value="onSongStart">onSongStart() - Song start</option>
+                <option value="onDestroy">onDestroy() - Song end</option>
+                <option value="onTimerCompleted">onTimerCompleted(tag) - Timer events</option>
+                <option value="onTweenCompleted">onTweenCompleted(tag) - Tween events</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>📜 Custom Lua Code</label>
+            <textarea id="customCallbackCode" rows="3" placeholder="debugPrint('Callback triggered!'); setProperty('camHUD.alpha', 0.5)"></textarea>
+        </div>
+        <button id="genCallbackScript">Generate Callback Script</button>
+    </div>
+
+    <!-- PAINEL OUTPUT -->
+    <div class="panel" style="flex: 1.2;">
+        <h2>📄 Generated Output</h2>
+        <div class="code-area">
+            <div class="code-header">
+                <span>📜 Lua Script / JSON Output</span>
+                <button id="copyBtn" class="success" style="padding: 0.3rem 0.8rem; font-size: 0.75rem;">📋 Copy</button>
+            </div>
+            <textarea id="outputScript" class="code-output" readonly wrap="off" spellcheck="false">-- Select a generator above
+-- Your Lua script or Stage JSON will appear here</textarea>
+        </div>
+        <div class="help-text" style="margin-top: 12px;">
+            ✅ Fully compatible with Psych Engine v0.7+ | All callbacks and functions based on official source code
+        </div>
+    </div>
+</div>
+
+<script>
+    const output = document.getElementById('outputScript');
+    
+    function setOutput(code) {
+        output.value = code;
+    }
+
+    // Note Skin Generator
+    document.getElementById('genNoteSkin').addEventListener('click', () => {
+        let texture = document.getElementById('noteTexture').value.trim() || "default_notes";
+        let effect = document.getElementById('noteEffect').value;
+        let extra = "";
+        if (effect === "shake") extra = `\n        setPropertyFromGroup('notes', i, 'angle', math.sin(getSongPosition() * 0.02) * 3)`;
+        if (effect === "scale") extra = `\n        setPropertyFromGroup('notes', i, 'scale.x', 1.1 + math.sin(getSongPosition() * 0.01) * 0.1)\n        setPropertyFromGroup('notes', i, 'scale.y', 1.1 + math.sin(getSongPosition() * 0.01) * 0.1)`;
+        if (effect === "glow") extra = `\n        setPropertyFromGroup('notes', i, 'colorTransform.redOffset', 50)\n        setPropertyFromGroup('notes', i, 'colorTransform.greenOffset', 50)`;
+        if (effect === "rotate") extra = `\n        setPropertyFromGroup('notes', i, 'angle', getSongPosition() * 0.05 % 360)`;
+        
+        setOutput(`-- Note Skin Script\nfunction onCreatePost()\n    for i = 0, getProperty('notes.length') - 1 do\n        setPropertyFromGroup('notes', i, 'texture', '${texture}')${extra}\n    end\nend\n\nfunction onNoteCreation(eventNote)\n    setPropertyFromGroup('notes', eventNote.id, 'texture', '${texture}')\nend`);
+    });
+
+    document.getElementById('genRainbowNotes').addEventListener('click', () => {
+        setOutput(`-- Rainbow Notes Effect\nlocal hue = 0\nfunction onUpdate(elapsed)\n    hue = (hue + 0.025) % 360\n    for i = 0, getProperty('notes.length') - 1 do\n        setPropertyFromGroup('notes', i, 'colorTransform.hue', hue)\n    end\nend`);
+    });
+
+    document.getElementById('genPulsingNotes').addEventListener('click', () => {
+        setOutput(`-- Pulsing Notes Effect\nfunction onUpdate(elapsed)\n    local pulse = 1 + math.sin(getSongPosition() * 0.02) * 0.1\n    for i = 0, getProperty('notes.length') - 1 do\n        setPropertyFromGroup('notes', i, 'scale.x', pulse)\n        setPropertyFromGroup('notes', i, 'scale.y', pulse)\n    end\nend`);
+    });
+
+    document.getElementById('genNoteSplashes').addEventListener('click', () => {
+        setOutput(`-- Custom Note Splashes\nfunction onNoteHit(eventNote)\n    if eventNote.isSustainNote then return end\n    makeLuaSprite('splash' .. eventNote.id, 'noteSplashes/splash', getPropertyFromGroup('notes', eventNote.id, 'x'), getPropertyFromGroup('notes', eventNote.id, 'y'))\n    setProperty('splash' .. eventNote.id, 'scale.x', 0.8)\n    setProperty('splash' .. eventNote.id, 'scale.y', 0.8)\n    addLuaSprite('splash' .. eventNote.id, true)\n    runTimer('destroySplash' .. eventNote.id, 0.3)\nend\n\nfunction onTimerCompleted(tag)\n    if string.sub(tag, 1, 13) == 'destroySplash' then\n        if luaSpriteExists(tag) then\n            removeLuaSprite(tag, true)\n        end\n    end\nend`);
+    });
+
+    // Camera Effects
+    document.getElementById('genCameraZoom').addEventListener('click', () => {
+        setOutput(`function onBeatHit()\n    if curBeat % 2 == 0 then\n        triggerEvent('Add Camera Zoom', 0.03, 0.03)\n    end\nend`);
+    });
+
+    document.getElementById('genCameraShake').addEventListener('click', () => {
+        setOutput(`function onNoteMiss()\n    triggerEvent('Screen Shake', '0.02, 0.01', '0.02')\nend`);
+    });
+
+    document.getElementById('genFlashEffect').addEventListener('click', () => {
+        setOutput(`function onBeatHit()\n    if curBeat % 4 == 0 then\n        cameraFlash('camGame', '0xFFFFFF', 0.3)\n    end\nend`);
+    });
+
+    document.getElementById('genChromAberration').addEventListener('click', () => {
+        setOutput(`-- Chromatic Aberration Effect\nfunction onCreate()\n    makeLuaSprite('chroma', '', 0, 0)\n    makeGraphic('chroma', screenWidth, screenHeight, '000000')\n    setProperty('chroma.alpha', 0.3)\n    addLuaSprite('chroma', true)\n    setShader('chroma', 'chromaticAberration')\nend`);
+    });
+
+    // Shader Generator
+    document.getElementById('genShaderScript').addEventListener('click', () => {
+        let shader = document.getElementById('shaderType').value;
+        let code = `-- Shader Effect: ${shader}\nfunction onCreate()\n    makeLuaSprite('shaderSprite', '', 0, 0)\n    makeGraphic('shaderSprite', screenWidth, screenHeight, 'FFFFFF')\n    setProperty('shaderSprite.alpha', 0.5)\n    addLuaSprite('shaderSprite', true)\n    setShader('shaderSprite', '${shader}')\nend`;
+        setOutput(code);
+    });
+
+    // Character Animations
+    document.getElementById('genCharacterAnim').addEventListener('click', () => {
+        let char = document.getElementById('charSelect').value;
+        setOutput(`-- Custom ${char} Animation\nfunction onBeatHit()\n    if curBeat % 2 == 0 then\n        if getProperty('${char}.animation.curAnim.name') == 'singUP' then\n            playAnim('${char}', 'singDOWN', true)\n        else\n            playAnim('${char}', 'singUP', true)\n        end\n    end\nend`);
+    });
+
+    document.getElementById('genGFX').addEventListener('click', () => {
+        setOutput(`-- Girlfriend Reaction\nfunction onBeatHit()\n    if curBeat % 4 == 0 then\n        playAnim('gf', 'cheer', true)\n    end\nend`);
+    });
+
+    document.getElementById('genHealthIcon').addEventListener('click', () => {
+        setOutput(`-- Custom Health Icon Behavior\nfunction onUpdate(elapsed)\n    local health = getProperty('health')\n    if health < 0.2 then\n        setProperty('healthBar.alpha', 0.5)\n        setProperty('iconP1.alpha', 0.5)\n    else\n        setProperty('healthBar.alpha', 1)\n        setProperty('iconP1.alpha', 1)\n    end\nend`);
+    });
+
+    document.getElementById('genStrumNotes').addEventListener('click', () => {
+        setOutput(`-- Strum Note Modifier\nfunction onCreatePost()\n    for i = 0, 3 do\n        setPropertyFromGroup('strumLineNotes', i, 'alpha', 0.7)\n        setPropertyFromGroup('strumLineNotes', i, 'scale.x', 0.9)\n        setPropertyFromGroup('strumLineNotes', i, 'scale.y', 0.9)\n    end\nend`);
+    });
+
+    // Cutscene & Dialogue
+    document.getElementById('genCutscene').addEventListener('click', () => {
+        setOutput(`-- Song Start Cutscene\nfunction onSongStart()\n    startVideo('cutscene')\n    -- or use dialogue\n    startDialogue('dialogue', 'intro')\nend`);
+    });
+
+    document.getElementById('genDialogue').addEventListener('click', () => {
+        let text = document.getElementById('dialogueText').value;
+        let lines = text.split('|').filter(l => l.trim());
+        let dialogueTable = lines.map(l => `"${l.trim()}"`).join(',\n        ');
+        setOutput(`-- Dialogue Box Script\nfunction onCreate()\n    local dialogue = {\n        ${dialogueTable}\n    }\n    startDialogue(dialogue, 'intro')\nend`);
+    });
+
+    document.getElementById('genEndCutscene').addEventListener('click', () => {
+        setOutput(`-- End Song Cutscene\nfunction onDestroy()\n    startVideo('endingCutscene')\nend`);
+    });
+
+    // Stage JSON Generator
+    document.getElementById('genStageJson').addEventListener('click', () => {
+        let stageJson = {
+            directory: document.getElementById('stageDir').value,
+            defaultZoom: parseFloat(document.getElementById('defaultZoom').value),
+            isPixelStage: document.getElementById('isPixelStage').value === 'true',
+            boyfriend: [parseInt(document.getElementById('bfX').value), parseInt(document.getElementById('bfY').value)],
+            girlfriend: [parseInt(document.getElementById('gfX').value), parseInt(document.getElementById('gfY').value)],
+            opponent: [parseInt(document.getElementById('oppX').value), parseInt(document.getElementById('oppY').value)]
+        };
+        
+        let customObjects = document.getElementById('stageObjects').value.trim();
+        if (customObjects && customObjects !== '[]') {
+            try {
+                stageJson.objects = JSON.parse(customObjects);
+            } catch(e) {
+                stageJson.objects = [];
+            }
+        }
+        
+        setOutput(JSON.stringify(stageJson, null, 2));
+    });
+
+    // Event Script
+    document.getElementById('genEventScript').addEventListener('click', () => {
+        let eventName = document.getElementById('eventName').value.trim() || "CustomEvent";
+        let action = document.getElementById('eventAction').value.trim() || "debugPrint('Event triggered: " + eventName + "')";
+        setOutput(`-- Event Script: ${eventName}\nfunction onEvent(name, value1, value2)\n    if name == '${eventName}' then\n        ${action}\n    end\nend`);
+    });
+
+    // Callback Script
+    document.getElementById('genCallbackScript').addEventListener('click', () => {
+        let callback = document.getElementById('callbackType').value;
+        let customCode = document.getElementById('customCallbackCode').value.trim() || "debugPrint('Callback " + callback + " executed!')";
+        let params = callback === 'onUpdate' ? 'elapsed' : (callback === 'onTimerCompleted' ? 'tag' : (callback === 'onTweenCompleted' ? 'tag' : ''));
+        setOutput(`-- Custom Callback: ${callback}\nfunction ${callback}(${params})\n    ${customCode}\nend`);
+    });
+
+    // AI Advanced Generator
+    document.getElementById('generateAiBtn').addEventListener('click', () => {
+        let prompt = document.getElementById('aiPrompt').value.toLowerCase();
+        if (!prompt.trim()) {
+            setOutput("-- Please describe what you want to create");
+            return;
+        }
+        
+        let code = "-- AI Generated Script for Psych Engine\n\n";
+        
+        if (prompt.includes('rainbow') || prompt.includes('arco')) code += `local hue = 0\nfunction onUpdate(elapsed) hue = (hue + 0.025) % 360 for i = 0, getProperty('notes.length')-1 do setPropertyFromGroup('notes', i, 'colorTransform.hue', hue) end end\n\n`;
+        if (prompt.includes('shake') || prompt.includes('tremer')) code += `function onUpdate(elapsed) if getProperty('health') < 0.5 then setProperty('camGame.angle', math.random(-3,3)) else setProperty('camGame.angle', 0) end end\n\n`;
+        if (prompt.includes('zoom')) code += `function onBeatHit() if curBeat % 2 == 0 then triggerEvent('Add Camera Zoom', 0.03, 0.03) end end\n\n`;
+        if (prompt.includes('cutscene') || prompt.includes('dialog')) code += `function onSongStart() startDialogue({"Hello!", "Welcome to my song!"}, 'intro') end\n\n`;
+        if (prompt.includes('health') || prompt.includes('vida')) code += `function onUpdate(elapsed) if getProperty('health') < 0.2 then triggerEvent('Screen Shake', '0.01, 0.01', '0.02') end end\n\n`;
+        if (prompt.includes('flash')) code += `function onBeatHit() if curBeat % 4 == 0 then cameraFlash('camGame', '0xFFFFFF', 0.3) end end\n\n`;
+        
+        if (code === "-- AI Generated Script for Psych Engine\n\n") {
+            code += `-- Generated from: "${prompt}"\nfunction onCreate()\n    debugPrint('Script loaded successfully!')\nend\n\nfunction onBeatHit()\n    debugPrint('Beat: ' .. curBeat)\nend`;
+        }
+        
+        setOutput(code);
+    });
+
+    // Copy function
+    document.getElementById('copyBtn').addEventListener('click', () => {
+        output.select();
+        navigator.clipboard.writeText(output.value).then(() => alert('✅ Copied!')).catch(() => { document.execCommand('copy'); alert('✅ Copied!'); });
+    });
+</script>
+</body>
+</html>
